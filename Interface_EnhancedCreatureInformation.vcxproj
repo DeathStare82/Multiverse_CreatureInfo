@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{BD8EB49A-36B9-458C-906A-B8C950EFE4C0}</ProjectGuid>
+    <RootNamespace>EditsforHelgtla</RootNamespace>
+    <Keyword>Win32Proj</Keyword>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ItemGroup>
+    <ClInclude Include="MonPreview.h" />
+    <ClInclude Include="CreatureDlgHandler.h" />
+    <ClInclude Include="CreatureDlgHooks.h" />
+    <ClInclude Include="CreatureDlgLayout.h" />
+    <ClInclude Include="CreatureSpellEffects.h" />
+    <ClInclude Include="PluginSettings.h" />
+    <ClInclude Include="PluginSettingsDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\headers\DrawPcx16ResizedBicubic.cpp" />
+    <ClCompile Include="..\headers\Era\era.cpp" />
+    <ClCompile Include="MonPreview.cpp" />
+    <ClCompile Include="CreatureDlgHandler.cpp" />
+    <ClCompile Include="CreatureDlgHooks.cpp" />
+    <ClCompile Include="CreatureSkillIcons.cpp" />
+    <ClCompile Include="PluginSettings.cpp" />
+    <ClCompile Include="PluginSettingsDlg.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+</Project>
