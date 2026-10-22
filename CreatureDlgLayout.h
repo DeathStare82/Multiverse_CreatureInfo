@@ -36,33 +36,35 @@ enum CreatureDialogItemId : int
 constexpr int NATIVE_DLG_WIDTH = 298;
 constexpr int NATIVE_DLG_HEIGHT = 311;
 
-constexpr int DLG_WIDTH = 350;
-constexpr int DLG_HEIGHT = 387;
+// 유저분의 Stackinfo 템플릿 규격(450x419)에 맞춘 크기 설정
+constexpr int DLG_WIDTH = 450;
+constexpr int DLG_HEIGHT = 419;
+
 // H3Dlg::DrawShadow draws an 8 px strip to the right and below the dialog.
 constexpr int DLG_SHADOW_SIZE = 8;
-constexpr int CONTENT_BOTTOM = 301;
+constexpr int CONTENT_BOTTOM = 380;
 
 constexpr int BUTTON_WIDTH = 46;
 constexpr int BUTTON_HEIGHT = 32;
-constexpr int BUTTON_Y = DLG_HEIGHT - BUTTON_HEIGHT - 48;
+constexpr int BUTTON_Y = DLG_HEIGHT - BUTTON_HEIGHT - 20;
 constexpr int OK_BUTTON_X = DLG_WIDTH - BUTTON_WIDTH - 18;
 constexpr int BUTTON_FRAME_BORDER = 1;
 constexpr int BUTTON_FRAME_WIDTH = BUTTON_WIDTH + BUTTON_FRAME_BORDER * 2;
 constexpr int BUTTON_FRAME_HEIGHT = BUTTON_HEIGHT + BUTTON_FRAME_BORDER * 2;
 constexpr int DISMISS_BUTTON_X = 127;
-constexpr int UPGRADE_BUTTON_X = 233;
+constexpr int UPGRADE_BUTTON_X = 330;
 constexpr int CAST_BUTTON_X = 126;
 constexpr int EXPERIENCE_BUTTON_X = 180;
 constexpr int HINT_MARGIN = 7;
-constexpr int MORALE_X = 24;
-constexpr int LUCK_X = 78;
+constexpr int MORALE_X = 48;
+constexpr int LUCK_X = 48;
 constexpr int MORALE_LUCK_BOTTOM_MARGIN = 46;
 constexpr int BATTLE_DIALOG_POSITION_OFFSET = 30;
 constexpr int ADVENTURE_DIALOG_BOTTOM_MARGIN = 145;
-constexpr int SPELL_COLUMN_X = 283;
-constexpr int SPELL_COLUMN_Y = 47;
+constexpr int SPELL_COLUMN_X = 287;
+constexpr int SPELL_COLUMN_Y = 108;
 constexpr int SPELL_ROW_HEIGHT = 42;
-constexpr int SPELL_VISIBLE_ROWS = 6;
+constexpr int SPELL_VISIBLE_ROWS = 4;
 constexpr int SPELL_ROWS_WITH_BUTTON = SPELL_VISIBLE_ROWS - 1;
 constexpr int SPELL_DURATION_WIDTH = 24;
 constexpr int SPELL_DURATION_HEIGHT = 12;
@@ -74,17 +76,17 @@ constexpr int SPELL_POPUP_DURATION_HEIGHT = 14;
 constexpr int SPELL_POPUP_RIGHT_MARGIN = 200;
 constexpr int SPELL_POPUP_BOTTOM_MARGIN = 48;
 
-constexpr int DESCRIPTION_DEFAULT_X = 24;
-constexpr int DESCRIPTION_DEFAULT_Y = 189;
-constexpr int DESCRIPTION_DEFAULT_WIDTH = 250;
-constexpr int DESCRIPTION_DEFAULT_HEIGHT = 55;
+constexpr int DESCRIPTION_DEFAULT_X = 20;
+constexpr int DESCRIPTION_DEFAULT_Y = 289;
+constexpr int DESCRIPTION_DEFAULT_WIDTH = 257;
+constexpr int DESCRIPTION_DEFAULT_HEIGHT = 56;
 constexpr int DESCRIPTION_MIN_X = 8;
-constexpr int DESCRIPTION_MAX_X = 262;
+constexpr int DESCRIPTION_MAX_X = 300;
 constexpr int DESCRIPTION_MIN_Y = 185;
-constexpr int DESCRIPTION_MAX_Y = 287;
+constexpr int DESCRIPTION_MAX_Y = 350;
 constexpr int DESCRIPTION_MIN_WIDTH = 16;
 constexpr int DESCRIPTION_MIN_HEIGHT = 14;
-constexpr int DESCRIPTION_RIGHT = 278;
+constexpr int DESCRIPTION_RIGHT = 430;
 constexpr int MAX_SKILL_WIDGETS = 32;
 constexpr DWORD STACK_EXPERIENCE_ENABLED_ADDRESS = 0x02772730;
 
@@ -96,7 +98,7 @@ constexpr int EXP_SCROLLBAR_GAP = 3;
 constexpr const char *OK_BUTTON_DEF = "iOkay2.def";
 constexpr const char *CAST_BUTTON_DEF = "iMagic.def";
 constexpr const char *SPELL_LIST_BUTTON_DEF = "iBaff.def";
-constexpr const char *DIALOG_BACKGROUND_PCX = "gemCrIBg.pcx";
+constexpr const char *DIALOG_BACKGROUND_PCX = "Stackinfo.def"; // 템플릿의 Stackinfo.def 배경 적용[cite: 7, 8]
 constexpr const char *DIALOG_HINT_BAR_PCX = "gemCrVar.pcx";
 constexpr const char *CREATURE_EXP_DEF = "DlgCrExp.def";
 constexpr const char *BUTTON_FRAME_PCX = "box46x32.pcx";
