@@ -1,0 +1,26 @@
+name: Build ERA Plugin
+
+on: [push, workflow_dispatch]
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v4
+
+    - name: Setup Developer Command Prompt
+      uses: ilammy/msvc-dev-cmd@v1
+      with:
+        arch: x86
+
+    - name: Build Plugin DLL
+      run: |
+        cl.exe /LD /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS *.cpp /Fe:Multiverse_CreatureInfo.era /link /DLL
+
+    - name: Upload Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Multiverse_CreatureInfo_plugin
+        path: Multiverse_CreatureInfo.era
