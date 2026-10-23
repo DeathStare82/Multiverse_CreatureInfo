@@ -1,5 +1,5 @@
 #pragma once
-#include "..\..\headers\header.h"
+#include "headers/header.h"
 #include "CombatHints.h"
 
 struct alignas(4) Settings
