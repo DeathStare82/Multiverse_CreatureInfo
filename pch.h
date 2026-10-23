@@ -16,7 +16,7 @@
 #define _WOG_
 #endif // _WOG_
 // Добавьте сюда заголовочные файлы для предварительной компиляции
-#include "..\headers\header.h"
+#include "headers/header.h"
 #include "MonPreview.h"
 #include "CreatureDlgHandler.h"
 #endif //PCH_H
