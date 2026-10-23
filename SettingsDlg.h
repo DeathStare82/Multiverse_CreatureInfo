@@ -1,6 +1,6 @@
 #pragma once
 #include "headers/header.h"
-#include "CombatHints.h"
+#include "headers/CombatHints.h"
 
 struct alignas(4) Settings
 {
