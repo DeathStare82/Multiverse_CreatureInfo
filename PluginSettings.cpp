@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "PluginSettings.h"
 #include "PluginSettingsDlg.h"
+#include "SettingsDlg.h"
 
 #include <cstdlib>
 
