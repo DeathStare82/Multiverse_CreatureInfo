@@ -1,5 +1,4 @@
 #include "pch.h"
-
 #include "CreatureDlgHandler.h"
 #include "CreatureDlgHooks.h"
 #include "CreatureDlgLayout.h"
@@ -13,6 +12,32 @@
 using namespace h3;
 using namespace creatureInfo;
 
+// 1. 생성자 (필수)
+CreatureDlgHandler::CreatureDlgHandler(H3CreatureInfoDlg *dlg, H3CombatCreature *creature, H3Army *army, int slot, const H3Hero *hero, int playerOwner)
+    : dlg(dlg), creature(creature), army(army), slot(slot), hero(hero), playerOwner(playerOwner)
+{
+    // 초기화 로직
+}
+
+// 2. 소멸자 (필수)
+CreatureDlgHandler::~CreatureDlgHandler()
+{
+    // 정리 로직
+}
+
+// 3. ScrollTo 함수 (필수)
+void CreatureDlgHandler::ScrollTo(int position)
+{
+    // 스크롤 구현 로직
+}
+
+// 4. BuildDescriptionArea 함수 (필수)
+int CreatureDlgHandler::BuildDescriptionArea()
+{
+    return 0;
+}
+
+// 5. 기존 기본 다이얼로그 처리 함수 내에 힌트 코드 추가
 void CreatureDlgHandler::HideDefaultBattleSpellItems()
 {
     if (!dlg)
@@ -22,7 +47,7 @@ void CreatureDlgHandler::HideDefaultBattleSpellItems()
         if (auto *item = dlg->GetH3DlgItem(id))
             item->HideDeactivate();
 
-    // 다이얼로그 아이템 힌트 설정 (함수 내부 배치)
+    // 마우스 오버 힌트 부여
     if (auto *moraleText = dlg->GetText(212))
     {
         moraleText->SetHints("사기 확률 설명: 기본 수치에 따른 추가 행동 확률이 적용됩니다.", h3_NullString, true);
@@ -37,4 +62,4 @@ void CreatureDlgHandler::HideDefaultBattleSpellItems()
     {
         extraShotsText->SetHints("여분 탄환 수: 남은 사격 횟수와 추가 보급된 탄환입니다.", h3_NullString, true);
     }
-} // <- 함수의 닫는 괄호가 여기에 정상적으로 위치해야 합니다.
+}
