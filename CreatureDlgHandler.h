@@ -22,12 +22,7 @@ class CreatureDlgHandler
         int baseY = 0;
     };
 
-    H3CreatureInfoDlg *dlg = nullptr;
-    H3CombatCreature *stack = nullptr;
-    H3Army *army = nullptr;
-    int armySlotIndex = -1;
     bool wogStackExperience = false;
-    const H3Hero *hero = nullptr;
     int playerColor = -1;
 
     int descriptionX = creatureInfo::DESCRIPTION_DEFAULT_X;
@@ -64,13 +59,14 @@ class CreatureDlgHandler
 
   public:
     H3CreatureInfoDlg *dlg;
-    H3CombatCreature *creature; // 추가
+    H3CombatCreature *creature; // stack 대신 creature 사용
     H3Army *army;
-    int slot;                   // 추가
+    int slot;                   // armySlotIndex 대신 slot 사용
     const H3Hero *hero;
-    int playerOwner;            // 추가
+    int playerOwner;            // playerColor 대신 playerOwner 사용
+
     CreatureDlgHandler(H3CreatureInfoDlg *dlg, H3CombatCreature *stack = nullptr, H3Army *army = nullptr,
-                       int armySlotIndex = -1, const H3Hero *hero = nullptr, int playerColor = -1);
+                         int armySlotIndex = -1, const H3Hero *hero = nullptr, int playerColor = -1);
     ~CreatureDlgHandler();
 
     void ScrollTo(int scrollTick);
