@@ -59,11 +59,11 @@ class CreatureDlgHandler
 
   public:
     H3CreatureInfoDlg *dlg;
-    H3CombatCreature *creature; // stack 대신 creature 사용
+    H3CombatCreature *stack;       // 원래 이름인 stack 사용
     H3Army *army;
-    int slot;                   // armySlotIndex 대신 slot 사용
+    int armySlotIndex;             // 원래 이름인 armySlotIndex 사용
     const H3Hero *hero;
-    int playerOwner;            // playerColor 대신 playerOwner 사용
+    int playerOwner;
 
     CreatureDlgHandler(H3CreatureInfoDlg *dlg, H3CombatCreature *stack = nullptr, H3Army *army = nullptr,
                          int armySlotIndex = -1, const H3Hero *hero = nullptr, int playerColor = -1);
