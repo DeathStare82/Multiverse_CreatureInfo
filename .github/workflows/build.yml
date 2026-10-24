@@ -18,7 +18,7 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        $cppFiles = Get-ChildItem -Recurse -Filter *.cpp | Select-Object -ExpandProperty FullName
+        $cppFiles = Get-ChildItem -Filter *.cpp | Select-Object -ExpandProperty FullName
         cl.exe /LD /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:Multiverse_CreatureInfo.era /link /DLL user32.lib
 
     - name: Upload Artifact
