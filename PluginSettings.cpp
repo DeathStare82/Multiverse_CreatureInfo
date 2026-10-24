@@ -119,16 +119,15 @@ void Settings::reset()
 {
     isEnabled = TRUE;
     isHeld = FALSE;
-    vKey = 0; // 또는 기본 설정 키 값
+    vKey = 0;
     height = 0.0f;
     fcolorFill = 0.0f;
     fcolorLoss = 0.0f;
     fsaturation = 0.0f;
 }
 
-int Settings::validateScanCode(h3::NH3VKey::eVirtualKeys scanCode) const
+BOOL Settings::validateScanCode(h3::NH3VKey::eVirtualKeys scanCode) const noexcept
 {
-    // 키 검증 로직 (필요에 따라 구현, 혹은 단순히 유효성 통과 처리)
-    return 1;
+    return TRUE;
 }
 
