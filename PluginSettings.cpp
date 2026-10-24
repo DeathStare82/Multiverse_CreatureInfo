@@ -108,3 +108,26 @@ void __stdcall RegisterPluginSettingsButton()
                        OpenPluginSettingsDialog);
 }
 } // namespace creatureInfo
+
+
+// 전역 설정 객체 정의
+Settings settings;
+
+// Settings 구조체 멤버 함수 정의
+void Settings::reset()
+{
+    isEnabled = TRUE;
+    isHeld = FALSE;
+    vKey = 0; // 또는 기본 설정 키 값
+    height = 0.0f;
+    fcolorFill = 0.0f;
+    fcolorLoss = 0.0f;
+    fsaturation = 0.0f;
+}
+
+int Settings::validateScanCode(h3::NH3VKey::eVirtualKeys scanCode) const
+{
+    // 키 검증 로직 (필요에 따라 구현, 혹은 단순히 유효성 통과 처리)
+    return 1;
+}
+
