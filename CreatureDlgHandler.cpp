@@ -13,8 +13,9 @@ using namespace h3;
 using namespace creatureInfo;
 
 // 1. 생성자 (필수)
-CreatureDlgHandler::CreatureDlgHandler(H3CreatureInfoDlg *dlg, H3CombatCreature *creature, H3Army *army, int slot, const H3Hero *hero, int playerOwner)
-    : dlg(dlg), creature(creature), army(army), slot(slot), hero(hero), playerOwner(playerOwner)
+CreatureDlgHandler::CreatureDlgHandler(H3CreatureInfoDlg *dlg, H3CombatCreature *stack, H3Army *army,
+                                     int armySlotIndex, const H3Hero *hero, int playerColor)
+    : dlg(dlg), stack(stack), army(army), armySlotIndex(armySlotIndex), hero(hero), playerColor(playerColor)
 {
     // 초기화 로직
 }
