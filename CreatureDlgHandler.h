@@ -63,6 +63,12 @@ class CreatureDlgHandler
     void ResetExperienceSkillsPanel();
 
   public:
+    H3CreatureInfoDlg *dlg;
+    H3CombatCreature *creature; // 추가
+    H3Army *army;
+    int slot;                   // 추가
+    const H3Hero *hero;
+    int playerOwner;            // 추가
     CreatureDlgHandler(H3CreatureInfoDlg *dlg, H3CombatCreature *stack = nullptr, H3Army *army = nullptr,
                        int armySlotIndex = -1, const H3Hero *hero = nullptr, int playerColor = -1);
     ~CreatureDlgHandler();
