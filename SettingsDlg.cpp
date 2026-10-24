@@ -167,8 +167,8 @@ void SettingsDlg::HitPointsBarDraw(H3DlgItem* label)noexcept
 {
 	constexpr int lossValue = 16;
 	//draw label colors
-	CombatHints::WindMgr_DrawColoredRect(label->GetAbsoluteX() + 1, label->GetAbsoluteY() + 1, lossValue - 1, &settings);
-	CombatHints::WindMgr_DrawColoredRect(label->GetAbsoluteX() + lossValue, label->GetAbsoluteY() + 1, label->GetWidth() - lossValue - 1, &settings, true);
+	//CombatHints::WindMgr_DrawColoredRect(label->GetAbsoluteX() + 1, label->GetAbsoluteY() + 1, lossValue - 1, &settings);
+	//CombatHints::WindMgr_DrawColoredRect(label->GetAbsoluteX() + lossValue, label->GetAbsoluteY() + 1, label->GetWidth() - lossValue - 1, &settings, true);
 
 	// show changes
 	label->Refresh();
