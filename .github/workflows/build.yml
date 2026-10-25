@@ -18,18 +18,14 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        # 문제의 WoG 폴더만 제외하고, era.cpp를 포함한 모든 필요한 .cpp 파일을 중복 없이 수집합니다.
+        # headers/WoG 폴더만 제외하고 모든 소스 파일을 중복 없이 수집합니다.
         $cppFiles = Get-ChildItem -Path . -Recurse -Filter *.cpp | Where-Object { $_.FullName -notmatch '\\headers\\WoG\\' } | Select-Object -ExpandProperty FullName | Select-Object -Unique
         
-        # 수집된 파일 목록을 로그에 출력하여 확인합니다.
-        Write-Host "--- Compiling Files ---"
-        $cppFiles | ForEach-Object { Write-Host $_ }
-        
-        # CreatureInformation.era 이름으로 컴파일 및 링크를 수행합니다.
-        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:CreatureInformation.era /link /DLL user32.lib
+        # 데몬의 원본 파일명인 new_battle_interface_dlg.dll로 빌드합니다.
+        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:new_battle_interface_dlg.dll /link /DLL user32.lib
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: CreatureInformation_plugin
-        path: CreatureInformation.era
+        name: new_battle_interface_plugin
+        path: new_battle_interface_dlg.dll
