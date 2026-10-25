@@ -22,7 +22,7 @@ jobs:
         $eraFile = Get-ChildItem -Recurse -Filter era.cpp | Select-Object -ExpandProperty FullName
         $resizeFile = Get-ChildItem -Recurse -Filter DrawPcx16ResizedBicubic.cpp | Select-Object -ExpandProperty FullName
         $cppFiles = @($rootFiles) + @($eraFile) + @($resizeFile) | Select-Object -Unique
-        cl.exe /LD /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:Multiverse_CreatureInfo.era /link /DLL user32.lib
+        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:Multiverse_CreatureInfo.era /link /DLL user32.lib
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
