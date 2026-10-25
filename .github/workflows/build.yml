@@ -1,31 +1,7 @@
-name: Build ERA Plugin
-
-on: [push, workflow_dispatch]
-
-jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-    - name: Checkout Code
-      uses: actions/checkout@v4
-
-    - name: Setup Developer Command Prompt
-      uses: ilammy/msvc-dev-cmd@v1
-      with:
-        arch: x86
-
-    - name: Build Plugin DLL
+- name: Build Plugin DLL
       shell: pwsh
       run: |
-        $rootFiles = Get-ChildItem -Filter *.cpp | Select-Object -ExpandProperty FullName
+        $dllMain = Get-ChildItem -Filter dllmain.cpp | Select-Object -ExpandProperty FullName
         $eraFile = Get-ChildItem -Recurse -Filter era.cpp | Select-Object -ExpandProperty FullName
-        $resizeFile = Get-ChildItem -Recurse -Filter DrawPcx16ResizedBicubic.cpp | Select-Object -ExpandProperty FullName
-        $cppFiles = @($rootFiles) + @($eraFile) + @($resizeFile) | Select-Object -Unique
-        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:Multiverse_CreatureInfo.era /link /DLL user32.lib
-
-    - name: Upload Artifact
-      uses: actions/upload-artifact@v4
-      with:
-        name: Multiverse_CreatureInfo_plugin
-        path: Multiverse_CreatureInfo.era
+        $cppFiles = @($dllMain) + @($eraFile) | Select-Object -Unique
+        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:Multiverse_CreatureInfo.era /link /DLL user32.lib /ENTRY:_DllMainCRTStartup
