@@ -18,10 +18,10 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        # 모든 .cpp 파일을 재귀적으로 검색하여 중복 없이 깔끔하게 수집합니다.
-        $cppFiles = Get-ChildItem -Recurse -Filter *.cpp | Select-Object -ExpandProperty FullName | Select-Object -Unique
+        # headers 폴더를 제외하고 루트 경로의 .cpp 파일들만 명시적으로 수집합니다.
+        $cppFiles = Get-ChildItem -Filter *.cpp | Select-Object -ExpandProperty FullName
         
-        # 데몬의 원본 플러그인 이름(CreatureInformation.era)으로 출력 파일을 생성합니다.
+        # 데몬의 원본 플러그인 이름(CreatureInformation.era)으로 정상 빌드합니다.
         cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:CreatureInformation.era /link /DLL user32.lib
 
     - name: Upload Artifact
