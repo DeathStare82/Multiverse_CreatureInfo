@@ -18,8 +18,8 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        # headers 폴더를 제외한 모든 경로의 .cpp 파일을 누락 없이 수집합니다.
-        $cppFiles = Get-ChildItem -Path . -Recurse -Filter *.cpp | Where-Object { $_.FullName -notmatch '\\headers\\' } | Select-Object -ExpandProperty FullName
+        # 문제의 WoG 폴더만 제외하고, era.cpp를 포함한 모든 필요한 .cpp 파일을 중복 없이 수집합니다.
+        $cppFiles = Get-ChildItem -Path . -Recurse -Filter *.cpp | Where-Object { $_.FullName -notmatch '\\headers\\WoG\\' } | Select-Object -ExpandProperty FullName | Select-Object -Unique
         
         # 수집된 파일 목록을 로그에 출력하여 확인합니다.
         Write-Host "--- Compiling Files ---"
