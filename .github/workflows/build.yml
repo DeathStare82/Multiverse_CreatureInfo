@@ -18,10 +18,10 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        # headers 폴더를 제외하고 루트 경로의 .cpp 파일들만 명시적으로 수집합니다.
-        $cppFiles = Get-ChildItem -Filter *.cpp | Select-Object -ExpandProperty FullName
+        # headers 폴더만 제외하고, 나머지 모든 경로의 .cpp 파일(era.cpp, 리사이즈 파일 등 포함)을 수집합니다.
+        $cppFiles = Get-ChildItem -Recurse -Filter *.cpp | Where-Object { $_.FullName -notmatch '\\headers\\' } | Select-Object -ExpandProperty FullName
         
-        # 데몬의 원본 플러그인 이름(CreatureInformation.era)으로 정상 빌드합니다.
+        # CreatureInformation.era 이름으로 정상 빌드합니다.
         cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:CreatureInformation.era /link /DLL user32.lib
 
     - name: Upload Artifact
