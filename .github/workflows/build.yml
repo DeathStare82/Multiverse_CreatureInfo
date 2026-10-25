@@ -18,14 +18,14 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        $rootFiles = Get-ChildItem -Filter *.cpp | Select-Object -ExpandProperty FullName
-        $eraFile = Get-ChildItem -Recurse -Filter era.cpp | Select-Object -ExpandProperty FullName
-        $resizeFile = Get-ChildItem -Recurse -Filter DrawPcx16ResizedBicubic.cpp | Select-Object -ExpandProperty FullName
-        $cppFiles = @($rootFiles) + @($eraFile) + @($resizeFile) | Select-Object -Unique
-        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:Multiverse_CreatureInfo.era /link /DLL user32.lib
+        # 모든 .cpp 파일을 재귀적으로 검색하여 중복 없이 깔끔하게 수집합니다.
+        $cppFiles = Get-ChildItem -Recurse -Filter *.cpp | Select-Object -ExpandProperty FullName | Select-Object -Unique
+        
+        # 데몬의 원본 플러그인 이름(CreatureInformation.era)으로 출력 파일을 생성합니다.
+        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:CreatureInformation.era /link /DLL user32.lib
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
       with:
-        name: Multiverse_CreatureInfo_plugin
-        path: Multiverse_CreatureInfo.era
+        name: CreatureInformation_plugin
+        path: CreatureInformation.era
