@@ -10,17 +10,15 @@ using namespace h3;
 
 _LHF_(HooksInit)
 {
-    try {
-        preview::MonPreview::Get();
-        Dlg_CreatureInfo_HooksInit(_PI);
-        Dlg_CreatureSpellInfo_HooksInit(_PI);
-        creatureInfo::RegisterPluginSettingsButton();
-    } catch (...) {}
-
+    preview::MonPreview::Get();
+    Dlg_CreatureInfo_HooksInit(_PI);
+    Dlg_CreatureSpellInfo_HooksInit(_PI);
+    creatureInfo::RegisterPluginSettingsButton();
     return EXEC_DEFAULT;
 }
 
-BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
+// 델파이 기반 Era 프레임워크가 진입점을 정확히 찾을 수 있도록 C 스타일로 외부에 노출합니다.
+extern "C" __declspec(dllexport) BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
     static bool initialized = false;
 
@@ -30,24 +28,16 @@ BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserv
         if (!initialized)
         {
             initialized = true;
-            try
+            Era::ConnectEra(hModule, "EraPlugins.Multiverse_CreatureInfo");
+            
+            globalPatcher = GetPatcher();
+            if (globalPatcher)
             {
-                // Era 연결 시도
-                Era::ConnectEra(hModule, "EraPlugins.Multiverse_CreatureInfo");
-
-                globalPatcher = GetPatcher();
-                if (globalPatcher)
+                _PI = globalPatcher->CreateInstance("EraPlugins.Multiverse_CreatureInfo");
+                if (_PI)
                 {
-                    _PI = globalPatcher->CreateInstance("EraPlugins.Multiverse_CreatureInfo");
-                    if (_PI)
-                    {
-                        _PI->WriteLoHook(0x4EEAF2, HooksInit);
-                    }
+                    _PI->WriteLoHook(0x4EEAF2, HooksInit);
                 }
-            }
-            catch (...)
-            {
-                // 초기화 중 예외가 발생해도 크래시로 인한 DLL 로드 실패를 방지합니다.
             }
         }
         break;
