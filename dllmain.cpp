@@ -10,41 +10,47 @@ using namespace h3;
 
 _LHF_(HooksInit)
 {
-    preview::MonPreview::Get();
-    Dlg_CreatureInfo_HooksInit(_PI);
-    Dlg_CreatureSpellInfo_HooksInit(_PI);
-
-    creatureInfo::RegisterPluginSettingsButton();
+    try {
+        preview::MonPreview::Get();
+        Dlg_CreatureInfo_HooksInit(_PI);
+        Dlg_CreatureSpellInfo_HooksInit(_PI);
+        creatureInfo::RegisterPluginSettingsButton();
+    } catch (...) {}
 
     return EXEC_DEFAULT;
 }
 
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
-    static _bool_ plugin_On = 0;
+    static bool initialized = false;
 
     switch (ul_reason_for_call)
     {
     case DLL_PROCESS_ATTACH:
-        if (!plugin_On)
+        if (!initialized)
         {
-            plugin_On = 1;
-
-            // 1. Era 연결을 가장 먼저 수행하여 환경을 초기화합니다.
-            Era::ConnectEra(hModule, "EraPlugins.Multiverse_CreatureInfo");
-
-            // 2. 그 후 패처 인스턴스를 생성하고 훅을 등록합니다.
-            globalPatcher = GetPatcher();
-            if (globalPatcher)
+            initialized = true;
+            try
             {
-                _PI = globalPatcher->CreateInstance("EraPlugins.Multiverse_CreatureInfo");
-                if (_PI)
+                // Era 연결 시도
+                Era::ConnectEra(hModule, "EraPlugins.Multiverse_CreatureInfo");
+
+                globalPatcher = GetPatcher();
+                if (globalPatcher)
                 {
-                    _PI->WriteLoHook(0x4EEAF2, HooksInit);
+                    _PI = globalPatcher->CreateInstance("EraPlugins.Multiverse_CreatureInfo");
+                    if (_PI)
+                    {
+                        _PI->WriteLoHook(0x4EEAF2, HooksInit);
+                    }
                 }
             }
+            catch (...)
+            {
+                // 초기화 중 예외가 발생해도 크래시로 인한 DLL 로드 실패를 방지합니다.
+            }
         }
-        break; // 빠져 있던 break 추가
+        break;
 
     case DLL_THREAD_ATTACH:
     case DLL_THREAD_DETACH:
