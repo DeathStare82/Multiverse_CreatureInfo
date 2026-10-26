@@ -24,7 +24,8 @@ jobs:
         Write-Host "--- Compiling Files ---"
         $cppFiles | ForEach-Object { Write-Host $_ }
         
-        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:new_battle_interface_dlg.dll /link /DLL user32.lib /ENTRY:_DllMainCRTStartup
+        # 잘못된 /ENTRY 옵션을 제거하고 필수 윈도우 라이브러리(kernel32.lib, user32.lib)를 함께 링크합니다.
+        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:new_battle_interface_dlg.dll /link /DLL kernel32.lib user32.lib
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4
