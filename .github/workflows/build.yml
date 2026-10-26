@@ -18,11 +18,13 @@ jobs:
     - name: Build Plugin DLL
       shell: pwsh
       run: |
-        # headers/WoG 폴더만 제외하고 모든 소스 파일을 중복 없이 수집합니다.
-        $cppFiles = Get-ChildItem -Path . -Recurse -Filter *.cpp | Where-Object { $_.FullName -notmatch '\\headers\\WoG\\' } | Select-Object -ExpandProperty FullName | Select-Object -Unique
+        # 파일 이름 기준(Group-Object)으로 중복 수집을 완전히 방지합니다.
+        $cppFiles = Get-ChildItem -Path . -Recurse -Filter *.cpp | Where-Object { $_.FullName -notmatch '\\headers\\WoG\\' } | Group-Object Name | ForEach-Object { $_.Group[0].FullName }
         
-        # 데몬의 원본 파일명인 new_battle_interface_dlg.dll로 빌드합니다.
-        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:new_battle_interface_dlg.dll /link /DLL user32.lib
+        Write-Host "--- Compiling Files ---"
+        $cppFiles | ForEach-Object { Write-Host $_ }
+        
+        cl.exe /LD /MT /O2 /EHsc /W3 /D_CRT_SECURE_NO_WARNINGS /Iheaders $cppFiles /Fe:new_battle_interface_dlg.dll /link /DLL user32.lib /ENTRY:_DllMainCRTStartup
 
     - name: Upload Artifact
       uses: actions/upload-artifact@v4

@@ -1,6 +1,11 @@
 #include "pch.h"
+#include "CreatureDlgHooks.h"
+#include "PluginSettings.h"
 
-// 초기화 로직을 완전히 제거하고 윈도우 로드 테스트만 수행합니다.
+// MonPreview.cpp 등 다른 파일에서 참조하는 전역 변수를 반드시 정의해야 링커 에러가 안 납니다.
+Patcher *globalPatcher = nullptr;
+PatcherInstance *_PI = nullptr;
+
 BOOL APIENTRY DllMain(HMODULE hModule, DWORD ul_reason_for_call, LPVOID lpReserved)
 {
     switch (ul_reason_for_call)
